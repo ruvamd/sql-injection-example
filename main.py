@@ -2,7 +2,7 @@ import os
 import base64
 import sqlite3
 
-from flask import Flask, request
+from flask import Flask,request
 
 app = Flask(__name__)
 
@@ -16,7 +16,8 @@ def home():
         transaction = "INSERT INTO messages VALUES ('{}', '{}')".format(
             request.remote_addr,
             request.form['content'],
-        )
+        ).strip("'")
+        
         c.execute(transaction)
         conn.commit()
 
